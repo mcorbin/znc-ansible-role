@@ -10,7 +10,7 @@
   user:
     name: "{{ znc_user }}"
     state: present
-    group: "{{ tour_user }}"
+    group: "{{ znc_user }}"
 
 - name: install package
   become: true
@@ -18,9 +18,3 @@
     name: "{{ znc_package }}"
     state: present
   register: _znc_package_task
-
-- name: initialize znc configuration
-  become: true
-  become_user: "{{ znc_user }}"
-  shell: znc --makeconf
-  when: _znc_package_task is changed
